@@ -2,7 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Microsoft YaHei";
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+html{
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+html, body {
+    user-select: none;
+}
+
+body{
+    margin: 0 auto;
 }
 
 .bg{
@@ -12,14 +25,19 @@
     top: 0;
     width: 100%;
     height: 18.6rem;
+    overflow: hidden;
     background: url('../images/bg.jpg');
     background-size: 100% 100%;
 }
 
 .bg-sm{
+    position: absolute;
+    top: 0;
+    left: 50%;
     width: 6.87rem;
     height: 2.93rem;
     margin: 0 auto;
+    transform: translateX(-50%);
     background: url('../images/text.png');
     background-size: 100% 100%;
 }
@@ -54,9 +72,234 @@
     background-size: 100% 100%;
 }
 
-.lottery-bg{
+.lottery-body{
+    position: relative;
+    width: 7.5rem;
     height: 7.55rem;
-    margin-top: 2rem;
+    margin: 2rem auto 0;
+}
+
+.lottery-bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background: url('../images/bg-03.png');
     background-size: 100% 100%;
+    transition: transform 2s ease-in-out;
+}
+
+.lottery-pointer{
+    position: absolute;
+    left: 50%;
+    top: .3rem;
+    z-index: 2;
+    width: .97rem;
+    height: 1.34rem;
+    background: url("../images/bg-01.png");
+    background-size: 100% 100%;
+    transform: translateX(-50%);
+}
+
+.lottery-start{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    width: 1.6rem;
+    height: 1.6rem;
+    background: url("../images/bg-02.png");
+    background-size: 100% 100%;
+    transform: translateX(-50%) translateY(-50%);
+    outline: none;
+    border-radius: 100%;
+}
+
+.prize-list {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.prize-item-wrapper {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3.75rem;
+    height: 3.75rem;
+}
+
+.prize-item {
+    width: 100%;
+    height: 100%;
+    padding-top: 1.4rem;
+    transform-origin: bottom;
+}
+.prize-name {
+    font-size: .2rem;
+    color: #000;
+    line-height: .6rem;
+}
+
+.prize-icon{
+    height: .8rem;
+    text-align: center;
+}
+
+.prize-line {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: .02rem;
+    height: 2.6rem;
+    transform-origin: bottom;
+    transform: translateX(-50%);
+    background: #ff735d;
+}
+
+.prize-icon img{
+    display: inline-block;
+    height: .8rem;
+}
+
+.lottery-descBox{
+    position: relative;
+    width: 7.35rem;
+    min-height: 5.05rem;
+    margin: 0 auto .4rem;
+    padding: .9rem .6rem .6rem .6rem;
+    font-size: .26rem;
+    color: #483000;
+    background: url("../images/box-bg.png");
+    background-size: 100% 100%;
+}
+
+.lottery-descHead{
+    position: absolute;
+    left: 50%;
+    top: -.15rem;
+    z-index: 2;
+    width: 4.04rem;
+    height: .9rem;
+    background: url("../images/title-01.png");
+    background-size: 100% 100%;
+    transform: translateX(-50%);
+}
+
+.lottery-wordBox {
+    line-height: .36rem;
+    margin-bottom: .2rem;
+}
+
+.lottery-bold{
+    font-weight: bold;
+    padding-right: .2rem;
+}
+
+.lottery-bolds{
+    margin-bottom: .2rem;
+}
+
+.lottery-tip{
+    height: .9rem;
+    line-height: .9rem;
+    text-align: center;
+}
+
+/*弹窗*/
+.overlay{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.overlay-bg{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 11;
+    background: url("../images/layer.png");
+    background-size: 100% 100%;
+}
+
+.overlay-body{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 2.1rem;
+    bottom: 0;
+    z-index: 12;
+}
+
+.overlay-closeBox{
+    width: 6rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.overlay-close{
+    float: right;
+    width: .48rem;
+    height: .48rem;
+    background: url("../images/guanbi.png");
+    background-size: 100% 100%;
+}
+
+.overlay-box{
+    width: 7.27rem;
+    height: 7.39rem;
+    margin: 0 auto;
+    background: url("../images/result-bg.png");
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+.overlay-star{
+    width: 2.51rem;
+    height: 1.16rem;
+    margin: .82rem auto 0;
+    background: url("../images/star.png");
+    background-size: 100% 100%;
+}
+
+.overlay-level{
+    position: relative;
+    z-index: 13;
+    margin-top: .3rem;
+    line-height: 1rem;
+    text-align: center;
+    font-size: .4rem;
+    color: #8c0118;
+    font-weight: bold;
+    -webkit-text-stroke: 1px #fff;
+}
+
+.overlay-prize{
+    font-size: .36rem;
+    color: #fcff00;
+    font-weight: bold;
+    text-align: center;
+}
+
+.overlay-get{
+    display: block;
+    margin: 2.6rem auto 0;
+    width: 4.72rem;
+    height: .75rem;
+    line-height: .75rem;
+    font-size: .3rem;
+    color: #fffde2;
+    text-align: center;
+    background: url("../images/btn-01.png");
+    background-size: 100% 100%;
+}
+
+.fl{
+    float: left;
 }

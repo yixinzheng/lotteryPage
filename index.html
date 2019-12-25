@@ -9,25 +9,145 @@
     <title>抽奖</title>
 </head>
 <body>
-<div class="bg">
-    <div class="bg-sm"></div>
-</div>
-<div class="container">
-    <div class="time-box">
-        <div class="time-item">活动结束倒计时</div>
-        <div class="time-bg">25</div>
-        <div class="time-item">:</div>
-        <div class="time-bg">25</div>
-        <div class="time-item">:</div>
-        <div class="time-bg">25</div>
-        <div class="time-item">:</div>
-        <div class="time-bg">25</div>
+<div id="app" v-cloak>
+    <div class="bg">
+        <div class="bg-sm"></div>
+        <div class="container">
+            <div class="time-box">
+                <div class="time-item">活动结束倒计时</div>
+                <div class="time-bg">25</div>
+                <div class="time-item">:</div>
+                <div class="time-bg">25</div>
+                <div class="time-item">:</div>
+                <div class="time-bg">25</div>
+                <div class="time-item">:</div>
+                <div class="time-bg">25</div>
+            </div>
+            <div class="lottery-body">
+                <div class="lottery-bg" :style="`transform: rotate(${wheelDeg}deg)`">
+                    <div class="prize-list">
+                        <div class="prize-item-wrapper" v-for="(item,index) in prizeList" :key="index">
+                            <div class="prize-item" :style="`transform: rotate(${(360/ prizeList.length) * index}deg)`">
+                                <div class="prize-name">
+                                    {{ item.name }}
+                                </div>
+                                <div class="prize-icon">
+                                    <img :src="item.icon">
+                                </div>
+                            </div>
+                            <div class="prize-line" :style="`transform: rotate(${(360/ prizeList.length ) * index - (360/ (2 * prizeList.length) )}deg)`"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lottery-pointer"></div>
+                <div class="lottery-start" @click="handleLottery"></div>
+            </div>
+            <div class="lottery-descBox">
+                <div class="lottery-descHead"></div>
+                <div class="lottery-wordBox">
+                    <div class="lottery-bold fl">活动时间:</div>
+                    <div>xxxx年xx月xx日——xxxx年xx月xx日</div>
+                </div>
+                <div class="lottery-wordBox">
+                    <div class="lottery-bold fl">活动规则:</div>
+                    <div>每个微信号每日可抽一次，每个微信号可获得2次奖励。</div>
+                </div>
+                <div class="lottery-wordBox">
+                    <div class="lottery-bold lottery-bolds">奖品说明:</div>
+                    <div>一等奖3名：xx品牌玩具</div>
+                    <div>三等奖5名：xx拉杆箱</div>
+                    <div>一等奖3名：xx品牌玩具</div>
+                    <div>三等奖5名：xx拉杆箱</div>
+                    <div>一等奖3名：xx品牌玩具</div>
+                    <div>三等奖5名：xx拉杆箱</div>
+                    <div>一等奖3名：xx品牌玩具</div>
+                    <div>三等奖5名：xx拉杆箱</div>
+                    <div>一等奖3名：xx品牌玩具</div>
+                    <div>三等奖5名：xx拉杆箱</div>
+                </div>
+                <div class="lottery-tip">本次活动最终解释权归xxx所有</div>
+            </div>
+        </div>
     </div>
-    <div class="lottery-bg">
-
+    <div class="overlay" v-if="state">
+        <div class="overlay-bg"></div>
+        <div class="overlay-body">
+            <div class="overlay-closeBox">
+                <div class="overlay-close" @click="state=false"></div>
+            </div>
+            <div class="overlay-box">
+                <div class="overlay-star"></div>
+                <div class="overlay-level">恭喜您，抽中三等奖</div>
+                <div class="overlay-prize">小米音响</div>
+                <div class="overlay-get">领取奖励</div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="js/rem.js"></script>
 <script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data:{
+            state: false,
+            wheelDeg: 0,
+            prizeNumber: 8,
+            prizeList: [
+                {
+                    icon: "images/pic-01.png",
+                    name: "小米扫地机器人"
+                },
+                {
+                    icon: "images/pic-02.png",
+                    name: "小米音箱"
+                },
+                {
+                    icon: "images/pic-03.png",
+                    name: "￥100 小区购物券"
+                },
+                {
+                    icon: "images/pic-04.png",
+                    name: "谢谢参与"
+                },
+                {
+                    icon: "images/pic-05.png",
+                    name: "￥50 缴费抵价券"
+                },
+                {
+                    icon: "images/pic-01.png",
+                    name: "小米扫地机器人"
+                },
+                {
+                    icon: "images/pic-02.png",
+                    name: "小米音箱"
+                },
+                {
+                    icon: "images/pic-03.png",
+                    name: "￥100 小区购物券"
+                },
+                {
+                    icon: "images/pic-04.png",
+                    name: "谢谢参与"
+                },
+                {
+                    icon: "images/pic-05.png",
+                    name: "￥50 缴费抵价券"
+                }
+            ]
+        },
+        methods: {
+            handleLottery: function () {
+                var that = this
+                var random = Math.floor(Math.random() * 10)
+                console.log(random)
+                this.wheelDeg = this.wheelDeg - this.wheelDeg % 360 + 6 * 360 + (360 - 360 / 10 * random)
+                setTimeout(function () {
+                    that.state = true
+                }, 2500)
+            }
+        }
+    })
+</script>
 </body>
 </html>
