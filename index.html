@@ -35,7 +35,8 @@
                                     <img :src="item.icon">
                                 </div>
                             </div>
-                            <div class="prize-line" :style="`transform: rotate(${(360/ prizeList.length ) * index - (360/ (2 * prizeList.length) )}deg)`"></div>
+                            <div class="prize-line"
+                                 :style="`transform: rotate(${(360/ prizeList.length ) * index - (360/ (2 * prizeList.length) )}deg)`"></div>
                         </div>
                     </div>
                 </div>
@@ -85,22 +86,23 @@
     </div>
 </div>
 <script src="js/rem.js"></script>
+<script src="js/md5.js"></script>
 <script src="js/vue.js"></script>
 <script>
     new Vue({
         el: '#app',
-        data:{
+        data: {
             state: false,
             wheelDeg: 0,
             prizeNumber: 8,
             prizeList: [
                 {
                     icon: "images/pic-01.png",
-                    name: "小米扫地机器人"
+                    name: "小米扫地机器人人"
                 },
                 {
                     icon: "images/pic-02.png",
-                    name: "小米音箱"
+                    name: "小米音箱小米音箱"
                 },
                 {
                     icon: "images/pic-03.png",
@@ -116,32 +118,27 @@
                 },
                 {
                     icon: "images/pic-01.png",
-                    name: "小米扫地机器人"
+                    name: "小米扫地机器人人"
                 },
                 {
                     icon: "images/pic-02.png",
-                    name: "小米音箱"
+                    name: "小米音箱小米音箱"
                 },
                 {
                     icon: "images/pic-03.png",
                     name: "￥100 小区购物券"
-                },
-                {
-                    icon: "images/pic-04.png",
-                    name: "谢谢参与"
-                },
-                {
-                    icon: "images/pic-05.png",
-                    name: "￥50 缴费抵价券"
                 }
             ]
+        },
+        mounted: function () {
+            this.getData()
         },
         methods: {
             handleLottery: function () {
                 var that = this
-                var random = Math.floor(Math.random() * 10)
+                var random = Math.floor(Math.random() * 8)
                 console.log(random)
-                this.wheelDeg = this.wheelDeg - this.wheelDeg % 360 + 6 * 360 + (360 - 360 / 10 * random)
+                this.wheelDeg = this.wheelDeg - this.wheelDeg % 360 + 6 * 360 + (360 - 360 / 8 * random)
                 setTimeout(function () {
                     that.state = true
                 }, 2500)
